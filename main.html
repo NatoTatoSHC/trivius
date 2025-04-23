@@ -107,7 +107,7 @@
             var value = String()
             var numregex = /\d{6}/;
 
-            var code = 0;
+            var code = "000001";
             var name = 0;
 
             var pages = {
@@ -122,13 +122,13 @@
                 if(numregex.test(codebox.value)) {
                     socket.emit('reqCodeVer', codebox.value);
                     code = codebox.value;
-                    console.log(code);
+                    //alert();
                 }
                 codebox.value = "";
             });
             nickform.addEventListener("submit", (e) => {
                 e.preventDefault();
-                socket.emit('newPlayer', );
+                socket.emit('newPlayer', nickbox.value, code);
                 name = nickbox.value;
                 nickbox.value = "";
             });
