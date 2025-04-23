@@ -1,0 +1,84 @@
+<html>
+    <head>
+        <title>Trivius</title>
+        <style>
+            body {
+                /*display: flex;
+                justify-content: center;
+                align-items: center;*/
+                background-image: url(data:image/jpeg;base64,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);
+                background-size: cover;
+                background-repeat: no-repeat;
+                
+            }
+            #joinpage {
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                width: 100%;
+                height: 100%;
+            }
+            #code {
+                width: 500px;
+                height: 100px;
+                font-size: xx-large;
+                border-radius: 100px;
+                text-align: center;
+            }
+
+            #submit {
+                width: 100px;
+                height: 100px;
+                font-size: xx-large;
+                border-radius: 25px;
+                text-align: center;
+
+            }
+            #host {
+                align-self: flex-end;
+                position: absolute;
+                width: 20%;
+                height: 10%;
+                border-radius: 10px;
+                font-size: x-large;
+            }
+            #joinpage > h1 {
+                position: absolute;
+                font-size: 400%;
+                top:100px;
+                
+            }
+            
+        </style>
+    </head>
+    <body>
+        <section id="joinpage">
+            <h1>Join Game</h1>
+            <form id="codeform" action="" >
+                <input type="text" id="code" placeholder="Game Code" maxlength="6" autocomplete="off"/>
+                <button id="submit">&rightarrow;</button>
+            </form>
+            <button id="host">Host</button>
+        </section>
+        <script src='https://cdn.socket.io/4.7.2/socket.io.min.js'></script>
+        <script>
+            var socket = io();
+            var codeform = document.getElementById("codeform");
+            var codebox = document.getElementById("code");
+            var value = String()
+            var numregex = /\d{6}/;
+
+            var pages = {
+                joinpage: document.getElementById('joinpage')
+            }
+
+            codeform.addEventListener("submit", (e) => {
+                e.preventDefault();
+                if(numregex.test(codebox.value)) {
+                    socket.emit('reqCodeVer', codebox.value);
+                }
+                codebox.value = "";
+            });
+        </script>
+    </body>
+</html>
