@@ -25,6 +25,13 @@
                 width: 100%;
                 height: 100%;
             }
+            #waitpage {
+                /*display: flex;*/
+                justify-content: center;
+                align-items: center;
+                width: 100%;
+                height: 100%;
+            }
             #code {
                 width: 500px;
                 height: 100px;
@@ -77,6 +84,12 @@
                 top:100px;
                 
             }
+            #waitpage > h1 {
+                position: absolute;
+                font-size: 400%;
+                top:100px;
+                
+            }
             
         </style>
     </head>
@@ -96,6 +109,10 @@
                 <button id="submitnick">&rightarrow;</button>
             </form>
         </section>
+        <section id="waitpage" hidden>
+            <h1>Waiting For Host To Start The Match</h1>
+            <img src="throb.gif" style="position: absolute;" width="100"/>
+        </section>
         <script src='https://cdn.socket.io/4.7.2/socket.io.min.js'></script>
         <script>
             var socket = io();
@@ -111,9 +128,11 @@
 
             var pages = {
                 joinpage: document.getElementById('joinpage'),
-                nickpage: document.getElementById('nickpage')
+                nickpage: document.getElementById('nickpage'),
+                waitpage: document.getElementById('waitpage')
             }
             pgChange(pages.nickpage, true);
+            pgChange(pages.waitpage, true);
             
 
             codeform.addEventListener("submit", (e) => {
@@ -131,11 +150,15 @@
                 socket.emit('newPlayer', nickbox.value, code);
                 name = nickbox.value;
                 nickbox.value = "";
+                pgChange(pages.joinpage, true);
+                pgChange(pages.nickpage, true);
+                pgChange(pages.waitpage, false);
             });
             
             socket.on('codeVer', (gamedata) => {
                 pgChange(pages.joinpage, true);
-                pgChange(pages.nickpage, false)
+                pgChange(pages.nickpage, false);
+                pgChange(pages.waitpage, true);
             });
 
             function pgChange(page, hide) {
