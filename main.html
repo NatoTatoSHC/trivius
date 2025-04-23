@@ -101,9 +101,14 @@
             
             var socket = io();
             var codeform = document.getElementById("codeform");
+            var nickform = document.getElementById("nickform");
             var codebox = document.getElementById("code");
+            var nickbox = document.getElementById("nick");
             var value = String()
             var numregex = /\d{6}/;
+
+            var code = 0;
+            var name = 0;
 
             var pages = {
                 joinpage: document.getElementById('joinpage'),
@@ -116,8 +121,15 @@
                 e.preventDefault();
                 if(numregex.test(codebox.value)) {
                     socket.emit('reqCodeVer', codebox.value);
+                    code = codebo.value;
                 }
                 codebox.value = "";
+            });
+            nickform.addEventListener("submit", (e) => {
+                e.preventDefault();
+                socket.emit('newPlayer', nickbox.value, code);
+                name = nickbox.value;
+                nickbox.value = "";
             });
             
             socket.on('codeVer', (gamedata) => {

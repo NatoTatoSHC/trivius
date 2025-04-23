@@ -26,6 +26,13 @@ io.on('connection', (socket) => {
             socket.emit('codeVer', games[code]);
         }
     });
+    socket.on('newPlayer', (name, code) => {
+        games[code].players.push({
+            name: name,
+            score: 0
+        });
+        console.log("Player "+name+", joined lobby");
+    });
 });
 
 server.listen(3000, () => {
