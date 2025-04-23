@@ -6,8 +6,10 @@ var { Server } = require('socket.io');
 var io = new Server(server);
 var os = require('os');
 
+
 var games = {
     "000001":{
+        room: "000001",
         players: [
             {
                 name:"name",
@@ -25,8 +27,8 @@ io.on('connection', (socket) => {
     socket.on('reqCodeVer', (code) => {
         if (Object.keys(games).indexOf(code) != -1) {
             socket.emit('codeVer', games[code]);
-            games[code].sockets.push(socket);
-            socket.disconnect();
+            socket.join(games[code].room);
+
         }
     });
     socket.on('newPlayer', (name, code) => {
@@ -36,9 +38,14 @@ io.on('connection', (socket) => {
         });
         console.log("Player "+name+", joined lobby");
     });
-    socket.on('log', (message) => {
+    /*socket.on('log', (message) => {
         console.log(message);
-    })
+    })*/
+   socket.on('disconnect', () => {
+    Object.keys(games).forEach(element => {
+        socket.leave(element);
+    });
+   })
 });
 
 server.listen(3000, () => {

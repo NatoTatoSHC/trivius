@@ -98,7 +98,6 @@
         </section>
         <script src='https://cdn.socket.io/4.7.2/socket.io.min.js'></script>
         <script>
-            
             var socket = io();
             var codeform = document.getElementById("codeform");
             var nickform = document.getElementById("nickform");
@@ -122,6 +121,7 @@
                 if(numregex.test(codebox.value)) {
                     socket.emit('reqCodeVer', codebox.value);
                     code = codebox.value;
+                    socket.emit('log', code)
                     //alert();
                 }
                 codebox.value = "";
