@@ -122,6 +122,7 @@
                 if(numregex.test(codebox.value)) {
                     socket.emit('reqCodeVer', codebox.value);
                     code = codebox.value;
+                    console.log(code);
                 }
                 codebox.value = "";
             });
