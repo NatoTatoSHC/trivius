@@ -14,7 +14,8 @@ var games = {
                 score:0
             }
         ],
-        isRunning: false
+        isRunning: false,
+        sockets:[]
     }
 };
 app.get('/', (req, res) => {
@@ -24,6 +25,8 @@ io.on('connection', (socket) => {
     socket.on('reqCodeVer', (code) => {
         if (Object.keys(games).indexOf(code) != -1) {
             socket.emit('codeVer', games[code]);
+            games[code].sockets.push(socket);
+            socket.disconnect();
         }
     });
     socket.on('newPlayer', (name, code) => {
@@ -33,6 +36,9 @@ io.on('connection', (socket) => {
         });
         console.log("Player "+name+", joined lobby");
     });
+    socket.on('log', (message) => {
+        console.log(message);
+    })
 });
 
 server.listen(3000, () => {
