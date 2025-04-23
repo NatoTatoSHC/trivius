@@ -22,7 +22,9 @@ app.get('/', (req, res) => {
 });
 io.on('connection', (socket) => {
     socket.on('reqCodeVer', (code) => {
-        socket.emit('codeVer', games[code]);
+        if (Object.keys(games).indexOf(code) != -1) {
+            socket.emit('codeVer', games[code]);
+        }
     });
 });
 
