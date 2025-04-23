@@ -121,13 +121,13 @@
                 e.preventDefault();
                 if(numregex.test(codebox.value)) {
                     socket.emit('reqCodeVer', codebox.value);
-                    code = codebo.value;
+                    code = codebox.value;
                 }
                 codebox.value = "";
             });
             nickform.addEventListener("submit", (e) => {
                 e.preventDefault();
-                socket.emit('newPlayer', nickbox.value, code);
+                socket.emit('newPlayer', );
                 name = nickbox.value;
                 nickbox.value = "";
             });
