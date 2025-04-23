@@ -11,7 +11,7 @@
                 background-repeat: no-repeat;
                 
             }
-            #joinpage {
+            .page {
                 display: flex;
                 justify-content: center;
                 align-items: center;
@@ -42,7 +42,7 @@
                 border-radius: 10px;
                 font-size: x-large;
             }
-            #joinpage > h1 {
+            .page > h1 {
                 position: absolute;
                 font-size: 400%;
                 top:100px;
@@ -52,13 +52,20 @@
         </style>
     </head>
     <body>
-        <section id="joinpage">
+        <section id="joinpage" class="page">
             <h1>Join Game</h1>
             <form id="codeform" action="" >
                 <input type="text" id="code" placeholder="Game Code" maxlength="6" autocomplete="off"/>
                 <button id="submit">&rightarrow;</button>
             </form>
             <button id="host">Host</button>
+        </section>
+        <section id="nickpage" class="page">
+            <h1>Name Yourself</h1>
+            <form id="nickform" action="" >
+                <input type="text" id="code" placeholder="Nickname" maxlength="6" autocomplete="off"/>
+                <button id="submit">&rightarrow;</button>
+            </form>
         </section>
         <script src='https://cdn.socket.io/4.7.2/socket.io.min.js'></script>
         <script>
@@ -69,8 +76,10 @@
             var numregex = /\d{6}/;
 
             var pages = {
-                joinpage: document.getElementById('joinpage')
+                joinpage: document.getElementById('joinpage'),
+                nickpage: document.getElementById('nickpage')
             }
+            pages.nickpage.hidden = true;
 
             codeform.addEventListener("submit", (e) => {
                 e.preventDefault();
@@ -81,7 +90,8 @@
             });
             socket.on('codeVer', (gamedata) => {
                 window.location.assign('https://www.google.com');
-            })
+            });
+
         </script>
     </body>
 </html>
